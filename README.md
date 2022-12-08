@@ -1,2 +1,7 @@
 # ParcInformatique
-Mon projet java pour la création d'un parc informatique
+
+@author
+RAMIANDRISOA Tiavina Malalaniaina
+
+@num
+ETU002025
