@@ -2,42 +2,49 @@ package display.panel;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.io.IOException;
 
 import javax.swing.*;
-import javax.swing.border.AbstractBorder;
+import javax.swing.border.BevelBorder;
 
-import systeminfo.SystemInfo;
+import systeminfo.SystemInfo2;
 
 public class BoxInfo extends JPanel {
 //	FIELDS
-	SystemInfo systemInfo;
+	SystemInfo2 systemInfo;
 	JLabel labelUserName;
 	JLabel labelOsName;
 	JLabel labelRamMax;
 	JLabel labelRamUsing;
+	JLabel labelHostName;
+	JLabel labelHostAddress;
 	
 //	CONSTRUCTOR
-	public BoxInfo(SystemInfo systemInfo) {
+	public BoxInfo(SystemInfo2 systemInfo) {
 		setSystemInfo(systemInfo);
-		setlabelUserName(new JLabel(getSystemInfo().getUserName()));
-		setLabelOsName(new JLabel("OS:"+getSystemInfo().getOsName()));
-		setLabelRamMax(new JLabel("RAM: "+getSystemInfo().getMaxMemory()+"go"));
-		setLabelRamUsing(new JLabel("RAM-use: "+getSystemInfo().getCurrentUsingMemory()+"go"));
+		setLabelHostName(new JLabel(getSystemInfo().getHostName()));
+		setlabelUserName(new JLabel("USER:"+getSystemInfo().getUsername()));
+		setLabelOsName(new JLabel("OS:"+getSystemInfo().getOsname()));
+		setLabelRamMax(new JLabel("RAM: "+getSystemInfo().getTotalMemorySize()+" go"));
+		setLabelRamUsing(new JLabel("RAM-use: "+getSystemInfo().getUsingMemorySize()+" go"));
+		setLabelHostAddress(new JLabel("Address IP:"+getSystemInfo().getHostAdress()));
 		settingDisplay();
 	}
 	
 	
-	public BoxInfo() {
-		setSystemInfo(new SystemInfo());
-		setlabelUserName(new JLabel(getSystemInfo().getUserName()));
-		setLabelOsName(new JLabel("OS:"+getSystemInfo().getOsName()));
-		setLabelRamMax(new JLabel("RAM: "+getSystemInfo().getMaxMemory()+"go"));
-		setLabelRamUsing(new JLabel("RAM-use: "+getSystemInfo().getCurrentUsingMemory()+"go"));
+	public BoxInfo() throws IOException {
+		setSystemInfo(new SystemInfo2());
+		setLabelHostName(new JLabel(getSystemInfo().getHostName()));
+		setlabelUserName(new JLabel("USER: "+getSystemInfo().getUsername()));
+		setLabelOsName(new JLabel("OS: "+getSystemInfo().getOsname()));
+		setLabelRamMax(new JLabel("RAM: "+getSystemInfo().getTotalMemorySize()+"go"));
+		setLabelRamUsing(new JLabel("RAM-use: "+getSystemInfo().getUsingMemorySize()+"go"));
+		setLabelHostAddress(new JLabel("Address IP:"+getSystemInfo().getHostAdress()));
 		settingDisplay();
 	}
 	
 //	GETTER
-	public SystemInfo getSystemInfo() {
+	public SystemInfo2 getSystemInfo() {
 		return systemInfo;
 	}
 	public JLabel getlabelUserName() {
@@ -52,9 +59,15 @@ public class BoxInfo extends JPanel {
 	public JLabel getLabelRamUsing() {
 		return labelRamUsing;
 	}
+	public JLabel getLabelHostName() {
+		return labelHostName;
+	}
+	public JLabel getLabelHostAddress() {
+		return labelHostAddress;
+	}
 	
 //	SETTER
-	public void setSystemInfo(SystemInfo systemInfo) {
+	public void setSystemInfo(SystemInfo2 systemInfo) {
 		this.systemInfo = systemInfo;
 	}
 	public void setlabelUserName(JLabel labelUserName) {
@@ -69,6 +82,12 @@ public class BoxInfo extends JPanel {
 	public void setLabelRamUsing(JLabel labelRamUsing) {
 		this.labelRamUsing = labelRamUsing;
 	}
+	public void setLabelHostName(JLabel labelHostName) {
+		this.labelHostName = labelHostName; 
+	}
+	public void setLabelHostAddress(JLabel labelHostAddress) {
+		this.labelHostAddress = labelHostAddress;
+	}
 	
 	
 	
@@ -76,30 +95,41 @@ public class BoxInfo extends JPanel {
 //	DISPLAY
 	public void settingDisplay() {
 		setBounds(0,0, 700, 200);
-		setBackground(new Color(102,255,153));
+		setBackground(new Color(45,153,155));
+		getLabelHostName().setForeground(new Color(245, 255, 255));
 		setLayout(null);
+		setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
+
 		
+		getLabelHostName().setFont(new Font("Arial", Font.BOLD, 32));
+		getLabelHostName().setBounds(20, 0, 300, 50);
+		add(getLabelHostName());
 		
-		getlabelUserName().setFont(new Font("Arial", Font.BOLD, 24));
-		getlabelUserName().setBounds(20, 0, 300, 50);
+		getlabelUserName().setFont(new Font("Arial", Font.PLAIN, 20));
+		getlabelUserName().setBounds(450, 80, 300, 30);
 		add(getlabelUserName());
 		
-		getLabelOsName().setFont(new Font("Arial", Font.PLAIN, 16));
-		getLabelOsName().setBounds(100, 50, 300, 30);
+		getLabelOsName().setFont(new Font("Arial", Font.PLAIN, 20));
+		getLabelOsName().setBounds(80, 80, 300, 30);
 		add(getLabelOsName());
 	
-		getLabelRamMax().setFont(new Font("Arial", Font.PLAIN, 16));
-		getLabelRamMax().setBounds(100, 80, 300, 30);
+		getLabelRamMax().setFont(new Font("Arial", Font.PLAIN, 20));
+		getLabelRamMax().setBounds(80, 130, 300, 30);
 		add(getLabelRamMax());
 
-		getLabelRamUsing().setFont(new Font("Arial", Font.PLAIN, 16));
-		getLabelRamUsing().setBounds(250, 80, 300, 30);
+		getLabelRamUsing().setFont(new Font("Arial", Font.PLAIN, 20));
+		getLabelRamUsing().setBounds(250, 130, 300, 30);
 		add(getLabelRamUsing());
+		
+		
+		getLabelHostAddress().setFont(new Font("Arial", Font.PLAIN, 20));
+		getLabelHostAddress().setBounds(450, 130, 300, 30);
+		add(getLabelHostAddress());
 	}
 	
 	
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException{
 		JFrame f = new JFrame();
 		f.setSize(800, 300);
 		f.setLayout(null);

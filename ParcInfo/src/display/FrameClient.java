@@ -3,12 +3,14 @@ package display;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 import listener.client.ListenerClient;
 
@@ -61,7 +63,7 @@ public class FrameClient extends JFrame {
 			JPanel p = getPanel();
 			p.setLayout(null);
 			p.setBounds(0, 0, 600, 450);
-			p.setBackground(new Color(40,40,40));
+			p.setBackground(new Color(34, 87, 122));
 			
 			buttonConnectSetting();
 			labelTitleSetting();
@@ -104,6 +106,7 @@ public class FrameClient extends JFrame {
 			b.setBounds(250, 300, 100, 35);
 			b.setBackground(new Color(204, 255, 255));
 	        b.setFont(new Font("Tahoma", 0, 14)); 
+	        b.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
 	        b.setText("CONNECT");
 	        b.addMouseListener(new ListenerClient(this));
 	        

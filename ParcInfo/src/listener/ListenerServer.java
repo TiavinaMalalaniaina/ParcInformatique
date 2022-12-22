@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 
 import display.FrameServer;
-import display.panel.PanelInfo;
 
 public class ListenerServer implements KeyListener, MouseListener {
 //	FIELDS
@@ -29,15 +28,15 @@ public class ListenerServer implements KeyListener, MouseListener {
 		switch(event.getExtendedKeyCode()) {
 		case KeyEvent.VK_CONTROL:
 			System.out.println("Actualiser");
+//			RefreshFrame re = new RefreshFrame(getFrameServer());
+//			re.start();
 			try {
+				FrameServer frameServer = new FrameServer(getFrameServer().getServer());
 				getFrameServer().setVisible(false);
-				setFrameServer(new FrameServer(getFrameServer().getServer()));
+				setFrameServer(frameServer);
 				getFrameServer().setVisible(true);
-//				getFrameServer().remove(frameServer.getPanelInfo());
-//				getFrameServer().add(new PanelInfo(getFrameServer().getServer()));
-			}
-			catch(IOException e) {
-				e.printStackTrace();
+			} catch(IOException e) {
+				
 			}
 		}
 		

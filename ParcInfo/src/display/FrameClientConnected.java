@@ -3,11 +3,13 @@ package display;
 import java.awt.Color;
 import java.awt.Font;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 
 import listener.client.ListenerClientConnected;
 import socket.client.Client;
@@ -21,6 +23,7 @@ public class FrameClientConnected extends JFrame {
 
 //	CONSTRUCTOR
 	public FrameClientConnected() {
+		super("Client");
 		setLabelTitle(new JLabel());
 		setPanel(new JPanel());
 		setButtonDisconnect(new JButton());
@@ -52,7 +55,7 @@ public class FrameClientConnected extends JFrame {
 		JPanel p = getPanel();
 		p.setLayout(null);
 		p.setBounds(0, 0, 600, 450);
-		p.setBackground(new Color(40,40,40));
+		p.setBackground(new Color(34, 87, 122));
 		
 		labelTitleSetting();
 		buttonDisconnectSetting();
@@ -75,6 +78,7 @@ public class FrameClientConnected extends JFrame {
 		b.setBackground(new Color(204, 255, 255));
         b.setFont(new Font("Tahoma", 0, 14)); 
         b.setText("DISCONNECT");
+        b.setBorder(BorderFactory.createBevelBorder(BevelBorder.RAISED));
         b.addMouseListener(new ListenerClientConnected(this));
         
 		getPanel().add(b);

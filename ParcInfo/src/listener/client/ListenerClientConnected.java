@@ -26,6 +26,12 @@ public class ListenerClientConnected implements MouseListener {
 		if(getFrameClient().getButtonDisconnect().equals(event.getSource())) {
 			getFrameClient().getClient().getThreadSending().setMessage("exit");
 			getFrameClient().dispose();
+			try {
+				Thread.sleep(2000);
+			}catch(InterruptedException e) {
+				
+			}
+			System.exit(0);
 		}
 
 	}

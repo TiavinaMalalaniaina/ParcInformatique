@@ -3,7 +3,6 @@ package socket.client;
 import java.io.*;
 import java.net.*;
 
-import systeminfo.SystemInfo;
 import thread.interaction.*;
 
 public class Client {
@@ -19,14 +18,12 @@ public class Client {
 			System.out.println("Recherche du serveur");
 			setSocket(new Socket(address, port));
 			System.out.println("Connection avec le serveur établie");
-			SystemInfo sys = new SystemInfo();
-			setThreadSending(new Sending(new PrintWriter(getSocket().getOutputStream()), sys.getAllInfo()));
+			setThreadSending(new Sending(new PrintWriter(getSocket().getOutputStream()), "nope"));
 			getThreadSending().start();
-			
 		} catch(UnknownHostException e) {
 			System.err.println("Impossible de se connecter à l'adresse "+getSocket().getLocalAddress());
 		} catch (IOException e) {
-			System.err.println("Aucun serveur trouvé sur le port "+getSocket().getLocalPort());
+			System.err.println("Aucun serveur trouvé sur le port "+port);
 		}
 	}
 	
@@ -54,7 +51,7 @@ public class Client {
 	
 	
 	public static void main(String[] args) {
-		Client c = new Client ("localhost", 4444);
+		Client c = new Client ("192.168.88.17", 4444);
 	}
 }
 

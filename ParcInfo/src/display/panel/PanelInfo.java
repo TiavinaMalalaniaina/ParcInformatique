@@ -8,7 +8,7 @@ import java.io.InputStreamReader;
 import java.util.Vector;
 
 import socket.server.Server;
-import systeminfo.SystemInfo;
+import systeminfo.SystemInfo2;
 
 public class PanelInfo extends JPanel {
 //	FIELDS
@@ -41,7 +41,7 @@ public class PanelInfo extends JPanel {
 	
 //	DISPLAYING
 	public void display() throws IOException{
-		setBackground(new Color(50,50,50));
+		setBackground(new Color(199, 249, 204));
 		setLayout(null);
 		boxInfoSetting();
 	}
@@ -50,9 +50,9 @@ public class PanelInfo extends JPanel {
 		for (int i = 0 ; i < getServer().getThread().getSockets().size() ; i++) {
 			try {
 				BufferedReader in = new BufferedReader(new InputStreamReader(getServer().getThread().getSockets().get(i).getInputStream()));
-				BoxInfo boxInfo = new BoxInfo(new SystemInfo(in.readLine()));
+				BoxInfo boxInfo = new BoxInfo(new SystemInfo2(in.readLine()));
 				getBoxInfos().add(boxInfo);
-				boxInfo.setBounds(10,(i*215)+10, 700, 200);
+				boxInfo.setBounds(10,(i*201)+10, 700, 200);
 				add(boxInfo);
 				setPreferredSize(new Dimension(800, 300*i));
 			} catch(Exception e) {

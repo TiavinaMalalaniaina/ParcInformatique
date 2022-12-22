@@ -16,13 +16,19 @@ public class Server{
 	public Server(int port) {
 		try {
 			ss = new ServerSocket(port);
-			System.out.println("Serveur lancé sur le port "+ss.getLocalPort());
-			setThread(new ConnectServer(getSS()));
-			getThread().start();
+			launchServer();
 		} 
 		catch(IOException e) {
 			System.err.println("Le port "+ss.getLocalPort()+" est deja utilisé!!!");
 		}
+	}
+	
+	
+//	LAUNCH THE SERVER
+	public void launchServer() {
+		System.out.println("Serveur lancé sur le port "+ss.getLocalPort());
+		setThread(new ConnectServer(getSS()));
+		getThread().start();
 	}
 	
 	

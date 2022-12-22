@@ -1,8 +1,10 @@
 package thread.interaction;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 
 import systeminfo.SystemInfo;
+import systeminfo.SystemInfo2;
 
 public class Sending extends Thread {
 //	FIELDS
@@ -19,21 +21,29 @@ public class Sending extends Thread {
 	@Override
 	public void run() {
 		while(true) {
-			System.out.println("Loading message ...");
-			out.println(getMessage());
-			out.flush();
-			System.out.println("Message send");
-			if(getMessage().equals("exit")) {
-				out.close();
-				break;
-			}
 			try {
-				Thread.sleep(500);
-			} catch(InterruptedException e) {
+				if(getMessage().equals("exit")) {
+					sendMessage();
+					break;
+				} else {
+					SystemInfo2 sys = new SystemInfo2();
+					setMessage(sys.getAllInfo());
+					sendMessage();
+				}
+				Thread.sleep(2000);
+			} catch(InterruptedException | IOException e) {
 				e.printStackTrace();
 			}
 		}
 		
+	}
+	
+//	SEND MESSAGE
+	public void sendMessage() {
+		System.out.println("Loading message ...");
+		out.println(getMessage());
+		out.flush();
+		System.out.println("Message send");
 	}
 	
 	

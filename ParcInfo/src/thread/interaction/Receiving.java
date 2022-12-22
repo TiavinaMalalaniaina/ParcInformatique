@@ -28,17 +28,18 @@ public class Receiving extends Thread {
 		while(true){
 	        try {	        	
 				message = in.readLine();
+				System.out.println("Message:"+message);
 				if(message.equals("exit")) {
 					getSocket().close();
 					getIn().close();
 					getCon().getSockets().remove(getSocket());
 					break;
 				}
-				System.out.println("Message:"+message);
+				
 			
 		    } catch (IOException e) {
-				
 				e.printStackTrace();
+				break;
 			}
 		}
 	}
